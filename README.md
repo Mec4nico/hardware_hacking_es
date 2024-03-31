@@ -470,6 +470,44 @@ Tenemos flasheado el CTF de Dreg, para leer la flag de la EEPROM introducimos es
 
 ![](assets/Pasted-image-20230921193046.png)
 
+### Comandos buspirate y analizador lógico.
+
+Así es como se conectaría el analizador lógico a la memoria flash y al bus pirate:
+
+![](assets/Pasted%20image%2020231031195408.png)
+schema by @dsanchezlavado
+
+Vamos a conectarnos igual que antes y veremos los siguientes comandos a nivel lógico.
+
+```
+[0xA0 0x00 0x69]
+[0xa1 r:20]
+[0xA0 0x00 0x69 0x41 0x41 0x41]
+```
+
+Ejecutamos \[0xA0 0x00 0x69]  para mover el puntero de escritura de la memoria a la dirección 0x0069 y prepararlo para leer desde ahi.
+
+Observamos que cuando comienza la instrucción el CLK baja y comienza a oscilar cuando comienza cada instrucción para marcar cada bit. 
+
+![](assets/i2c-analyzer-Wregister.jpg)
+
+
+![](assets/Pasted-image-0240331153758.png)
+
+![](assets/Pasted-image-20240331153821.png)
+
+![](assets/Pasted-image_20240331153834.png)
+
+![](assets/i2cinicioyfinal.jpg)
+
+Al ejecutar esto ya tenemos la memoria apuntando a la dirección 0x0069 , ahora ejecutamos \[0xa1 r:20] que manda al chip I2C a leer a partir de la dirección actual 20 bytes.
+
+![](assets/Pasted-image-20240331161623.png)
+
+Todo esto funciona usando los registros de lectura y escritura de la eeprom, en este caso el registro de lectura esta en **0xa1** y lee desde la dirección actual 0x0069 20 bytes en adelante.
+
+Abriendo el fichero del logic de este [enlace](Archivos_Taller_2/Captura_I2C_completa.sal) con el Logic 2 podremos ver como nos devuelve cada byte con el contenido del mismo y como vuelve a bajar y a subir el CLK (reloj) a principio y al final de la insttrucción.
+
 Para saber mas sobre el protocolo I2C con el bus pirate lee [esto.](http://dangerousprototypes.com/blog/bus-pirate-manual/i2c-guide/)
 
 Usamos un conversor de [hexadecimal](https://gchq.github.io/CyberChef/) y obtenemos este resultado.
