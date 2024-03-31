@@ -506,7 +506,7 @@ Al ejecutar esto ya tenemos la memoria apuntando a la dirección 0x0069 , ahora 
 
 Todo esto funciona usando los registros de lectura y escritura de la eeprom, en este caso el registro de lectura esta en **0xa1** y lee desde la dirección actual 0x0069 20 bytes en adelante.
 
-Abriendo el fichero del logic de este [enlace](Archivos_Taller_2/Captura_I2C_completa.sal) con el Logic 2 podremos ver como nos devuelve cada byte con el contenido del mismo y como vuelve a bajar y a subir el CLK (reloj) a principio y al final de la insttrucción.
+Abriendo el fichero del logic de este [enlace](assets/Archivos_Taller_2/Captura_I2C_completa.sal) con el Logic 2 podremos ver como nos devuelve cada byte con el contenido del mismo y como vuelve a bajar y a subir el CLK (reloj) a principio y al final de la instrucción.
 
 Para saber mas sobre el protocolo I2C con el bus pirate lee [esto.](http://dangerousprototypes.com/blog/bus-pirate-manual/i2c-guide/)
 
